@@ -87,7 +87,9 @@ class WMSSource(Source):
         if self.extent and not self.extent.contains(MapExtent(query.bbox, query.srs)):
             return self._get_sub_query(query, format)
         resp = self.client.retrieve(query, format)
-        return ImageSource(resp, size=query.size, image_opts=self.image_opts)
+        img_opts = self.image_opts.copy()
+        img_opts.format = format
+        return ImageSource(resp, size=query.size, image_opts=image_opts)
     
     def _get_sub_query(self, query, format):
         size, offset, bbox = bbox_position_in_image(query.bbox, query.size, self.extent.bbox_for(query.srs))

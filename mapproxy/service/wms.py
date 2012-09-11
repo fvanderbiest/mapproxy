@@ -73,7 +73,7 @@ class WMSServer(Server):
         self.check_map_request(map_request)
 
         params = map_request.params
-        query = MapQuery(params.bbox, params.size, SRS(params.srs), params.format)
+        query = MapQuery(params.bbox, params.size, SRS(params.srs), params.format_mime_type)
 
         if map_request.params.get('tiled', 'false').lower() == 'true':
             query.tiled_only = True
