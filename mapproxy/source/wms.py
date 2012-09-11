@@ -89,7 +89,7 @@ class WMSSource(Source):
         resp = self.client.retrieve(query, format)
         img_opts = self.image_opts.copy()
         img_opts.format = format
-        return ImageSource(resp, size=query.size, image_opts=image_opts)
+        return ImageSource(resp, size=query.size, image_opts=img_opts)
     
     def _get_sub_query(self, query, format):
         size, offset, bbox = bbox_position_in_image(query.bbox, query.size, self.extent.bbox_for(query.srs))
